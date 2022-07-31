@@ -2,20 +2,21 @@
 
 class Mesa{
     - String numero
-    + Integer calcularValorMesa()
-    + Integer pagar()
+    + Integer calcularTotal()
+    + Integer pagar(Integer efectivo)
 }
 
 class Pedido{
-    + Integer calcularValorPedido()
+    - String cliente
+    + Integer calcularValor()
 }
 
 enum EstadoPedido{
-    + SIN_ENTREGAR
+    + PENDIENTE_ENTREGAR
     + PENDIENTE_COBRAR
 }
 
-class Corrientazo{
+abstract OpcionPedido {
     - Integer precio
 }
 
@@ -24,34 +25,46 @@ class Adicional{
     - Integer precio
 }
 
-class OpcionSopa{
+class Completo{
+
+}
+
+class Bandeja{
+
+}
+
+
+class Sopa{
     - String nombre
 }
 
-class OpcionPrincipio{
+class Principio{
     - String nombre
 }
 
-class OpcionCarne {
+class Carne {
     - String nombre
 }
 
-class OpcionEnsalada {
+class Ensalada {
     - String nombre
 }
 
-class OpcionJugo {
+class Jugo {
     - String nombre
 }
 
-Mesa o-right- "1..*" Pedido
-Pedido .right.> EstadoPedido
-Pedido *-- Corrientazo
-Pedido "*" *-- "0" Adicional
-Corrientazo -- "1" OpcionSopa
-Corrientazo -- "1" OpcionPrincipio
-Corrientazo -- "1" OpcionCarne
-Corrientazo -- "1..0" OpcionEnsalada
-Corrientazo -- "1" OpcionJugo
+Mesa "1" -- "1..*" Pedido
+Pedido .left.> EstadoPedido
+Pedido "1" -- "1" OpcionPedido
+Pedido "*" o-right- "0" Adicional
+Completo *-- "1" Sopa
+OpcionPedido <|-left- Bandeja
+OpcionPedido <|-left- Completo
+OpcionPedido *-- "1" Principio
+OpcionPedido *-- "1" Carne
+OpcionPedido *-- "1..0" Ensalada
+OpcionPedido *-- "1" Jugo
+
 
 @enduml
