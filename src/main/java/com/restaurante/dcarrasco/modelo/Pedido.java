@@ -1,15 +1,44 @@
 package com.restaurante.dcarrasco.modelo;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-
+    private String cliente;
     private EstadoPedido estado;
-    private Corrientazo almuerzo;
-    private List<Adicional> adicional;
+    private OpcionPedido opcion;
+    private List<Adicional> adicionales;
 
-    public Integer calcularValor() {
+    public Pedido(String cliente, OpcionPedido opcion) {
+        this.cliente = cliente;
+        this.opcion = opcion;
 
-        return 0;
+        this.estado = EstadoPedido.PENDIENTE_ENTREGAR;
+        adicionales = new ArrayList<>();
+    }
+    
+    public String getCliente() {
+        return cliente;
     }
 
+    public EstadoPedido getEstado() {
+        return estado;
+    }
+
+    public void agregarAdicional(Adicional adicional) {
+        this.adicionales.add(adicional);
+    }
+
+    public Integer calcularValor() {
+        var total = opcion.getPrecio();
+        total += adicionales.stream()
+                .map(item -> item.getPrecio())
+                .reduce((a, b) -> a + b)
+                .orElse(0);
+        return total;
+    }
+
+    public void entregar() {
+        estado = EstadoPedido.PENDIENTE_COBRAR;
+    }
 }
