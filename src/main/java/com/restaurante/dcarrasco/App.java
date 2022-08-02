@@ -1,5 +1,7 @@
 package com.restaurante.dcarrasco;
 
+import com.restaurante.dcarrasco.controlador.RestauranteController;
+import com.restaurante.dcarrasco.exception.PagoinsuficienteException;
 import com.restaurante.dcarrasco.modelo.Adicional;
 import com.restaurante.dcarrasco.modelo.Bandeja;
 import com.restaurante.dcarrasco.modelo.Carne;
@@ -20,9 +22,20 @@ public final class App {
 
     /**
      * Says hello to the world.
+     * 
      * @param args The arguments of the program.
      */
     public static void main(String[] args) {
+        
+        //pruebaVenta();
+
+        var controlador = new RestauranteController();
+
+        controlador.crearMesa();
+        controlador.crearMesa();
+    }
+
+    private static void pruebaVenta() {
         var mesa = new Mesa("01");
         var sopa = new Sopa("Pastas");
         var principio = new Principio("Frijoles");
@@ -44,5 +57,13 @@ public final class App {
 
         System.out.printf("Total de la mesa: $ %,d \n", mesa.calcularTotal());
 
+        var efectivo = 20_000;
+        try {
+            var devuelta = mesa.pago(efectivo);
+            System.out.printf("Paga la cuenta con %,d y recibe una devuelta de %,d",
+                    efectivo, devuelta);
+        } catch (PagoinsuficienteException ex) {
+            System.out.println("Dinero insuficiente");
+        }
     }
 }
