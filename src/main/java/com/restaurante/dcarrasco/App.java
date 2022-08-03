@@ -1,5 +1,7 @@
 package com.restaurante.dcarrasco;
 
+import java.util.Scanner;
+
 import com.restaurante.dcarrasco.controlador.RestauranteController;
 import com.restaurante.dcarrasco.exception.PagoinsuficienteException;
 import com.restaurante.dcarrasco.modelo.Adicional;
@@ -26,13 +28,25 @@ public final class App {
      * @param args The arguments of the program.
      */
     public static void main(String[] args) {
-        
-        //pruebaVenta();
 
-        var controlador = new RestauranteController();
+        // pruebaVenta();
 
-        controlador.crearMesa();
-        controlador.crearMesa();
+        try (var sc = new Scanner(System.in)) {
+            
+            var controlador = new RestauranteController(sc);
+
+            controlador.iniciarBaseDatos();
+
+
+            var mesa = controlador.consultarMesa("01");
+            System.out.println("La mesa consultada es: " + mesa.getNumero());
+
+            controlador.agregarPedido(mesa);
+            System.out.println("El total de la mesa es:  " + mesa.calcularTotal());
+
+        }catch (Exception ex) {
+            System.err.println("Ocurrio un error y salgo de la aplicación: \n" + ex.getMessage());
+        }
     }
 
     private static void pruebaVenta() {

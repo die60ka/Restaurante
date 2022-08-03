@@ -9,14 +9,19 @@ import com.restaurante.dcarrasco.modelo.Mesa;
 
 public class MesaView {
 
+    private Scanner entrada;
+
+    public MesaView(Scanner entrada) {
+        this.entrada = entrada;
+    }
+
     public String leerNumeroMesa() {
         System.out.println(".: AGREGANDO UNA NUEVA MESA :.");
 
         do {
             try {
-                var sc = new Scanner(System.in);
                 System.out.print("Ingrese el número de la mesa: ");
-                var numero = sc.nextLine();
+                var numero = entrada.nextLine();
     
                 return numero;
             } catch (Exception ex) {

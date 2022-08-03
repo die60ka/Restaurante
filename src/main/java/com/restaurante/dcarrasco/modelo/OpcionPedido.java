@@ -65,5 +65,13 @@ public abstract class OpcionPedido {
     }
 
 
+
+    @Override
+    public String toString() {
+        return "OpcionPedido [carne=" + carne + ", ensalada=" + ensalada + ", jugo=" + jugo + ", precio=" + precio
+                + ", principio=" + principio + "]";
+    }
+
+
     
 }

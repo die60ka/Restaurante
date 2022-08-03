@@ -26,4 +26,11 @@ public class Completo extends OpcionPedido{
         return sopa;
     }
     
+    @Override
+    public String toString() {
+        return "Completo [precio= " + getPrecio()
+        + ", sopa=" + getSopa()+ ", principio=" + getPrincipio() + 
+        ", carne=" + getCarne() + ", ensalada=" + getEnsalada() + 
+        ", jugo=" + getJugo() + "]";
+    }
 }

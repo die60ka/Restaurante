@@ -11,4 +11,8 @@ public class Sopa {
         return nombre;
     }
     
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
