@@ -18,6 +18,10 @@ public class Mesa {
         return numero;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
     public void entregarPedido(Pedido pedido) {
         pedido.entregar();
     }
@@ -28,26 +32,19 @@ public class Mesa {
 
     public Integer calcularTotal() {
         return this.pedidos.stream()
+                .filter(pedido -> pedido.getEstado() == EstadoPedido.PENDIENTE_COBRAR)
                 .map(pedido -> pedido.calcularValor())
                 .reduce((a, b) -> a + b)
                 .orElse(0);
     }
 
-    public Integer pago(Integer efectivo) throws PagoinsuficienteException{
-        var total = calcularTotal();
-        if (efectivo < total) {
-            // TODO Lanzar excepcion por fondos insuficinetes
-            throw new PagoinsuficienteException("El efectivo no es suficiente para pagar el total de la mesa");
-        }
-        // Eliminar pedidos
-        this.pedidos.clear();
-        
-        return efectivo - total;
-    }
-
     @Override
     public String toString() {
         return numero;
+    }
+
+    public void limpiarPedidos() {
+        pedidos.clear();
     }
 
 }

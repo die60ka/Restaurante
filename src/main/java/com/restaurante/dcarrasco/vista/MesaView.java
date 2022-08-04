@@ -1,7 +1,5 @@
 package com.restaurante.dcarrasco.vista;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,6 +31,22 @@ public class MesaView {
     public void mostrarMesas(List<Mesa> mesas) {
         System.out.println(".: MESAS EXISTENTES :.");
         mesas.forEach(System.out::println);
+    }
+
+    public Integer leerValorEfectivo() {
+        System.out.println(".: PAGO DE LA CUENTA :.");
+
+        do {
+            try {
+                System.out.print("Ingrese el efectivo proporcionado por el cliente: ");
+                var numero = entrada.nextInt();
+                entrada.nextLine();
+    
+                return numero;
+            } catch (Exception ex) {
+                System.err.println("Por favor ingrese un valor válido");
+            }
+        } while (true);
     }
 
 }
