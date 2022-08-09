@@ -1,8 +1,10 @@
 package com.restaurante.dcarrasco.vista;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.restaurante.dcarrasco.controlador.RestauranteController;
+import com.restaurante.dcarrasco.exception.ObjetoNoExistenteEsception;
 import com.restaurante.dcarrasco.exception.PagoinsuficienteException;
 
 public class PrincipalView {
@@ -22,27 +24,32 @@ public class PrincipalView {
             System.out.println("0 -> Salir de la aplicación");
             System.out.println("1 -> Gesition de Pedidos");
             System.out.println("2 -> Gesition de datos maestros\n");
-
-            var opcion = leerEntero("Ingrese su opcion: ");
-            switch (opcion) {
-                case 0:
-                    mostrarMenu = false;
-                    System.out.println("\nHasta pronto!");
-                    break;
-                case 1:
-                    gestionPedidos();
-                    break;
-                case 2:
-                    gestionDatosMaestros();
-                    break;
-                default:
-                    System.out.println("Opción invalida, intente de nuevo");
-                    break;
+            try {
+                var opcion = leerEntero("Ingrese su opcion: ");
+                switch (opcion) {
+                    case 0:
+                        mostrarMenu = false;
+                        System.out.println("\nHasta pronto!");
+                        break;
+                    case 1:
+                        gestionPedidos();
+                        break;
+                    case 2:
+                        gestionDatosMaestros();
+                        break;
+                    default:
+                        System.out.println("Opción invalida, intente de nuevo");
+                        break;
+                } 
+            } catch (SQLException ex) {
+                System.err.println("Ha ocurrido un error con la base de datos.");
+                System.err.println("\t" + ex.getMessage());
             }
         }
     }
+    
 
-    private void gestionDatosMaestros() {
+    private void gestionDatosMaestros() throws SQLException {
         
         var mostrarMenu = true;
         while (mostrarMenu) {
@@ -54,8 +61,7 @@ public class PrincipalView {
             System.out.println("4 -> creación de Carne");
             System.out.println("5 -> creación de Ensalada");
             System.out.println("6 -> creación de Jugo");
-
-
+            System.out.println("7 -> creación de Adicional");
             var opcion = leerEntero("Ingrese su opcion: ");
             switch (opcion) {
                 case 0:
@@ -66,29 +72,32 @@ public class PrincipalView {
                     controller.crearMesa();
                     break;
                 case 2:
-                    gestionDatosMaestros();
+                    //TODO: Implementar
                     break;
                 case 3:
-                    gestionDatosMaestros();
+                    //TODO: Implementar
                     break;
                 case 4:
-                    gestionDatosMaestros();
+                    //TODO: Implementar
                     break;
                 case 5:
-                    gestionDatosMaestros();
+                    //TODO: Implementar
                     break;
                 case 6:
-                    gestionDatosMaestros();
+                    //TODO: Implementar
+                    break;
+                case 7:
+                    //TODO: Implementar
                     break;
                 default:
                     System.out.println("Opción invalida, intente de nuevo");
                     break;
             }
-            esperarEnter();
+        esperarEnter();
         }
     }
 
-    private void gestionPedidos() {
+    private void gestionPedidos() throws SQLException {
         var mesa = controller.seleccionarMesa();
 
         System.out.println("\n.: GESTION DE PEDIDOS :.");
@@ -119,6 +128,8 @@ public class PrincipalView {
                 } catch (PagoinsuficienteException e) {
                     mostrarError(e.getMessage());
                     e.printStackTrace();
+                } catch (ObjetoNoExistenteEsception e) {
+                    mostrarError("La información de los pedidos es  inconsistente");
                 }
                 break;
             case 5:

@@ -1,6 +1,9 @@
 package com.restaurante.dcarrasco.modelo;
 
 public class Carne {
+    // Para manejo de base de datos
+    private Integer id;
+
     private String nombre;
 
     public Carne(String nombre) {
@@ -9,6 +12,14 @@ public class Carne {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

@@ -1,6 +1,6 @@
 CREATE TABLE Mesa (
     id INTEGER PRYMARY KEY,
-    numreo VARCHAR(10) NOT NULL
+    numero VARCHAR(10) NOT NULL
     );
 
 CREATE TABLE TipoOpcion (

@@ -1,5 +1,6 @@
 package com.restaurante.dcarrasco.vista;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.restaurante.dcarrasco.controlador.RestauranteController;
@@ -23,7 +24,7 @@ public class PedidoView {
         this.controller = controller;
     }
 
-    public Pedido cargarPedido() {
+    public Pedido cargarPedido() throws SQLException {
         System.out.print("Ingrese el nombre (descripcion) del cliente: ");
         var cliente = entrada.nextLine();
 
@@ -58,7 +59,7 @@ public class PedidoView {
         return new Pedido(cliente, opcion);
     }
 
-    private Sopa elegirOpcionSopa() {
+    private Sopa elegirOpcionSopa() throws SQLException {
         Sopa respuesta = null;
         var opciones = controller.listarSopas();
         do {
@@ -82,8 +83,9 @@ public class PedidoView {
 
     /**
      * @return
+     * @throws SQLException
      */
-    private Principio elegirOpcionPrincipio() {
+    private Principio elegirOpcionPrincipio() throws SQLException {
         Principio respuesta = null;
         var opciones = controller.listarPrincipios();
         do {
@@ -105,7 +107,7 @@ public class PedidoView {
         return respuesta;
     }
 
-    private Carne elegirOpcionCarne() {
+    private Carne elegirOpcionCarne() throws SQLException {
         Carne respuesta = null;
         var opciones = controller.listarCarnes();
         do {
@@ -127,7 +129,7 @@ public class PedidoView {
         return respuesta;
     }
 
-    private Ensalada elegirOpcionEnsalada() {
+    private Ensalada elegirOpcionEnsalada() throws SQLException {
         Ensalada respuesta = null;
         var opciones = controller.listarEnsaladas();
         do {
@@ -153,7 +155,7 @@ public class PedidoView {
         return respuesta;
     }
 
-    private Jugo elegirOpcionJugo() {
+    private Jugo elegirOpcionJugo() throws SQLException {
         Jugo respuesta = null;
         var opciones = controller.listarJugos();
         do {

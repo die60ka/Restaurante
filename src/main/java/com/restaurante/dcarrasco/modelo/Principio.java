@@ -1,6 +1,10 @@
 package com.restaurante.dcarrasco.modelo;
 
 public class Principio {
+
+    // Para manejo de base de datos
+    private Integer id;
+
     private String nombre;
 
     public Principio(String nombre) {
@@ -9,6 +13,14 @@ public class Principio {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

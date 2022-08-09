@@ -7,6 +7,9 @@ public abstract class OpcionPedido {
     private Ensalada ensalada;
     private Jugo jugo;
 
+    // Para manejo de base de datos
+    private Integer id;
+
     public OpcionPedido(Integer precio) {
         this.precio = precio;
     }
@@ -64,7 +67,13 @@ public abstract class OpcionPedido {
         this.jugo = jugo;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
